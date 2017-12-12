@@ -1,0 +1,136 @@
+37  36  35  34  33  32  31
+38  17  16  15  14  13  30
+39  18   5   4   3  12  29
+40  19   6   1   2  11  28
+41  20   7   8   9  10  27
+42  21  22  23  24  25  26
+43  44  45  46  47  48  49
+
+
+
+growth r,u,l,d increasing odds
+
+
+
+3, 11, 19
+
+
+1 + orig + 8 * (n - 1)
+
+
++ 8 + 8 + 3
++ 8 + 3
++ 3
+
+
++ 8 + 8 + 8 + 3
++ 8 + 8 + 3
++ 8 + 3
++ 3
+
+
+1 + (orig * dist) + (4 * dist * (dist - 1))
+
+
+
+4 * x(x + 1)
+
+0 1       0,0     1
+
+1 2       1,0     1       0                             1 multiplier 1  n/a
+2 3       1,1     2       1 + 0                         2               n/a
+3 4       0,1     4       2 + 1 + 0                     3               n/a
+4 5       -1,1    5       3 + 0                         2               n/a
+5 6       -1,0    10      4 + 3 + 0                     3               n/a
+6 7       -1,-1   11      5 + 0                         2               n/a
+7 8       0,-1    23      6 + 5 + 1 + 0                 4
+8 9       1,-1    25      7 + 1 + 0                     3
+
+9 10      2,-1    26      8 + 1                         2 multiplier 2  n/a
+10 11     2,0     54      9 + 8 + 2 + 1                 3               n/a
+11 12     2,1     57      10 + 2 + 1                    3               1
+12 13     2,2     59      11 + 2                        2               n/a
+13 14     1,2     122     12 + 11 + 3 + 2               4               n/a
+14 15     0,2     133     13 + 4 + 3 + 2                4               2
+15 16     -1,2    142     n-1 + n-11 + n-12             3               3
+16 17     -2,2    147     n-1 + n-12                    2               n/a
+17 18     -2,1    304     n-1 + n-2 + n-12 + n-13       4
+18        -2,0    330                                                   4
+19        -2,-1   351                                                   5
+20        -2,-2   362
+21        -1,-2   747
+22        0,-2    806
+23        1,-2    880
+24        2,-2    931
+
+
+if precedes corner do not use follower
+if follows corner do not use trailer
+if does not precede or follow trailer, increment inbound
+if follows corner, use n-2
+
+
+
+
+1 1 2 4 5 10 11 23 25 26 54 57 59 122 133 142 147 304 330
+
+
+
+1
+
+1: n-1
+
+2: n-1 + n-2
+
+4: n-1 + n-2 + n-3
+
+5: n-1 + n-4
+
+10: n-1 + n-2 + n-5
+
+11: n-1 + n-6
+
+23: n-1 + n-2 + n-6 + n-7
+
+25: n-1 + n-7 + n-8
+
+26: n-1 + n-8
+
+54: n-1 + n-2 + n-9
+
+57: n-1 + n-9 + n-10
+
+59: n-1 + n-10
+
+122: n-1 + n-2 + n-10 + n-11
+
+133: n-1 + n-10 + n-11 + n-12
+
+142: n-1 + n-11 + n-12
+
+147: n-1 + n-12
+
+
+s[n-1] +
+  (if pos == sum of multiples of 8 (s[n - prevpower of 8 + 1)) +
+
+
+
+
+s[n-1] + s[n-1 / 8 + 1]
+    !corner
+
+
+func isCorner()
+
+a(n) = a(n-1) +
+
+     is corner? (inbound)
+     is not corner?
+
+  followscorner a(n-2) +
+  notfollowscorner trailer
+  notprecedecorner leader
+  notcorner inbound
+
+func trailer
