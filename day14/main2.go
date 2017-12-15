@@ -127,7 +127,5 @@ func main() {
 		
 	}
 	fmt.Println(islands)
-	fmt.Println(len(visited))
-		
 	
 }
