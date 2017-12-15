@@ -59,13 +59,12 @@ func getBitArrayForHash(byteArray []byte) []bool {
 			skipVal++
 		}
 	}
-	hash := make([]byte, 16)
 	bits := make([]bool, 0, 128)
 	for i:=0; i < 16; i++ {
+		var v byte
 		for j:=0; j < 16; j++ {
-			hash[i] = hash[i] ^ byte(seq[i*16+j])
+			v = v ^ byte(seq[i*16+j])
 		}
-		v := hash[i]
 		var j uint
 		for j = 0; j < 8 ; j++ {
 			bit := ((v & (1 << (7-j))) != 0)
