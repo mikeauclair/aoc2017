@@ -2,7 +2,6 @@ package main
 
 import (
 	"bufio"
-	"encoding/hex"
 	"fmt"
 	"log"
 	"os"
@@ -56,20 +55,17 @@ func getSetBitsForHash(byteArray []byte) int {
 			skipVal++
 		}
 	}
-	hash := make([]byte, 16)
 	var sum byte
 	for i:=0; i < 16; i++ {
+		var v byte
 		for j:=0; j < 16; j++ {
-			hash[i] = hash[i] ^ byte(seq[i*16+j])
+			v = v ^ byte(seq[i*16+j])
 		}
-		v := hash[i]
 		for ; v != 0; v >>= 1 {
 			sum += v & 1
 		}
 	}
 
-	fmt.Println(hex.EncodeToString(hash), sum)
-	
 	return int(sum)
 }
 
@@ -90,7 +86,6 @@ func main() {
 		calcMoves = append(calcMoves, numberBytes...)
 		calcMoves = append(calcMoves, trailingBytes...)
 		sum += getSetBitsForHash(calcMoves)
-		fmt.Println(string(calcMoves), sum)
 	}
 
 	fmt.Println(sum)

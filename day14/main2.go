@@ -12,10 +12,6 @@ const (
 	ascii_offset byte = 48
 )
 
-type regionResult struct {
-	
-}
-
 func checkErr(err error) {
 	if err != nil {
 		log.Fatalf("Error: %v", err)
